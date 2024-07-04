@@ -1,4 +1,5 @@
 #include <string>
+#include <cstdlib>
 using namespace std;
 
 class SimilarityChecker {
@@ -13,8 +14,14 @@ private:
 			return 60;
 		if (a * 2 == b || a == 2 * b)
 			return 0;
+		
+		if (a < b) {
+			int tmp = a;
+			a = b;
+			b = tmp;
+		}
 
-		int gap = a - b;
+		double gap = abs(a - b);
 		int result = (1 - gap / b) * 60;
 		return result;
 	}
