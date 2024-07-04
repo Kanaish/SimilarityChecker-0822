@@ -1,5 +1,4 @@
 #include <string>
-#include <cstdlib>
 using namespace std;
 
 class SimilarityChecker {
@@ -9,19 +8,24 @@ public:
 	}
 	
 private:
+	void swap(int& a, int& b)
+	{
+		int tmp = a;
+		a = b;
+		b = tmp;
+	}
 	int length_checker(int a, int b) {
 		if (a == b)
 			return 60;
-		if (a * 2 == b || a == 2 * b)
-			return 0;
 		
 		if (a < b) {
-			int tmp = a;
-			a = b;
-			b = tmp;
+			swap(a, b);
 		}
 
-		double gap = abs(a - b);
+		if (a == 2 * b)
+			return 0;
+
+		double gap = a - b;
 		int result = (1 - gap / b) * 60;
 		return result;
 	}
